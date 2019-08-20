@@ -14,7 +14,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import com.enterprise.dao.CustomerDaoImpl.UserDetailMapper;
+import com.enterprise.dao.UserDetailDaoImpl.UserDetailMapper;
 import com.enterprise.dto.BankResource;
 import com.enterprise.entity.AccountMapping;
 import com.enterprise.entity.Bank;

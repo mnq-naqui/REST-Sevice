@@ -17,7 +17,7 @@ import org.springframework.stereotype.Repository;
 import com.enterprise.entity.UserDetail;
 
 @Repository
-public class CustomerDaoImpl implements CustomerDao {
+public class UserDetailDaoImpl implements UserDetailDao {
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -97,7 +97,7 @@ public class CustomerDaoImpl implements CustomerDao {
     // Retrieve one
 	@Override
     public Optional<UserDetail> findById(Integer id) {
-		final String sql = "SELECT user_detail_id, username, email, mobile, current_address, permanent_address, city_ref, state_ref, pincode FROM user_detail WHERE user_id = ?";
+		final String sql = "SELECT user_detail_id, username, email, mobile, current_address, permanent_address, city_ref, state_ref, pincode FROM user_detail WHERE user_detail_id = ?";
 		
 		return this.jdbcTemplate.query(
 		        sql,

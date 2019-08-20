@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import com.enterprise.entity.UserDetail;
 
-public interface CustomerDao {
+public interface UserDetailDao {
 
 	UserDetail create(UserDetail userDetail);
 
