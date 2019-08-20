@@ -17,7 +17,7 @@ import org.springframework.stereotype.Repository;
 import com.enterprise.entity.UserDetail;
 
 @Repository
-public class CustomerDaoImpl implements CustomerDao {
+public class UserDetailDaoImpl implements UserDetailDao {
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;

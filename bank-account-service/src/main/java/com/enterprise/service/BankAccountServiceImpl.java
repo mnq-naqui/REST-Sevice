@@ -6,7 +6,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.enterprise.dao.CustomerDao;
+import com.enterprise.dao.UserDetailDao;
 import com.enterprise.dto.UserDetailResource;
 import com.enterprise.entity.UserDetail;
 import com.enterprise.exception.CustomerNotFound;
@@ -15,7 +15,7 @@ import com.enterprise.exception.CustomerNotFound;
 public class BankAccountServiceImpl implements BankAccountService {
 	
 	@Autowired
-	CustomerDao customerDao;
+	UserDetailDao customerDao;
 	
 	@Override
 	public UserDetail createBankAccount(UserDetailResource customerDto) {
