@@ -1,0 +1,18 @@
+ POST : http://localhost:8080//evry/rest/bankaccount --> Create resource(User with bank and branches) Validation:
+ One bank and one branch should be there.
+ 
+ POST : http://localhost:8080//evry/rest/bankaccount/bank/{bankId} --> Create new bank for user
+ POST : http://localhost:8080//evry/rest/bankaccount/bank/{bankId}/branch/{branchId} --> Create new branch for user
+ 
+ PUT :  http://localhost:8080//evry/rest/bankaccount/{userId} --> Can update only user info
+ PUT :  http://localhost:8080//evry/rest/bankaccount/{userId}/branch/{branchId}/deposit --> To deposit cash
+ PUT :  http://localhost:8080//evry/rest/bankaccount/{userId}/branch/{branchId}/withdraw--> To withdraw cash
+ 
+ DELETE : http://localhost:8080//evry/rest/bankaccount/{userId}  --> Delete User
+ DELETE : http://localhost:8080//evry/rest/bankaccount/{userId}/bank/{bankId}  --> Delete Bank (Branches) Validation:
+  We can not delete users branch if the given id is the only branch
+
+ GET : http://localhost:8080//evry/rest/bankaccount  --> Get all users 
+ GET : http://localhost:8080//evry/rest/bankaccount/{userId}  --> Fetch user of the givenId
+ GET : http://localhost:8080//evry/rest/bankaccount/{userId}/bank  --> Get all bank for user
+ GET : http://localhost:8080//evry/rest/bankaccount/{userId}/bank/{bankId}  --> Get bank from supplied for user

@@ -4,10 +4,13 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.Resources;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.enterprise.dto.UserDetailResource;
 import com.enterprise.entity.AccountDetail;
@@ -63,10 +67,17 @@ public class BankAccountController {
     }
 	
 	@PutMapping(value = "/{customerId}")
-    public ResponseEntity<UserDetail> updateBankAccount(@PathVariable("customerId") long customerId,@RequestBody UserDetailResource customerDto) {
+    public ResponseEntity<UserDetailResource> updateBankAccount(@PathVariable("customerId") long customerId,@RequestBody UserDetailResource customerDto) {
 	      
 		UserDetail updatedCustomer = accountService.updateBankAccount(customerDto);
-		return new ResponseEntity<UserDetail>(updatedCustomer, HttpStatus.OK);
+		UserDetailResource userDetailResource = new UserDetailResource();
+		BeanUtils.copyProperties(updatedCustomer, userDetailResource);
+		    
+	    userDetailResource.add(linkTo(BankAccountController.class).withRel("bankaccounts"));
+	    userDetailResource.add(linkTo(methodOn(BankController.class).getBanksForUser(userDetailResource.getUserId())).withRel("banks"));
+		userDetailResource.add(linkTo(methodOn(BankAccountController.class).getBankAccount(userDetailResource.getUserId())).withSelfRel());
+
+		return ResponseEntity.ok(userDetailResource);
 	 }
 
 	@DeleteMapping("/{customerId}")
@@ -76,15 +87,42 @@ public class BankAccountController {
 	}
 	
 	@GetMapping("/{customerId}")
-	public ResponseEntity<UserDetail> getBankAccount(@PathVariable int customerId) {
+	public  ResponseEntity<UserDetailResource> getBankAccount(@PathVariable int customerId) {
 		
-		UserDetail customer = accountService.getBankAccount(customerId);
-		return new ResponseEntity<UserDetail>(customer, HttpStatus.OK); 
+		UserDetail userDetail = accountService.getBankAccount(customerId);
+	
+		UserDetailResource userDetailResource = new UserDetailResource();
+		BeanUtils.copyProperties(userDetail, userDetailResource);
+		    
+	    userDetailResource.add(linkTo(BankAccountController.class).withRel("bankaccounts"));
+		userDetailResource.add(linkTo(methodOn(BankController.class).getBanksForUser(userDetailResource.getUserId())).withRel("banks"));
+		userDetailResource.add(linkTo(methodOn(BankAccountController.class).getBankAccount(userDetailResource.getUserId())).withSelfRel());
+		    
+		return ResponseEntity.ok(userDetailResource);
 	}
 		
 	@GetMapping
-	public ResponseEntity<List<UserDetail>> getBankAccounts() {
+	public ResponseEntity<Resources<UserDetailResource>> getBankAccounts() {
 		
-		return new ResponseEntity<List<UserDetail>>(accountService.getBankAccounts(), HttpStatus.OK);
+		List<UserDetail> collection = accountService.getBankAccounts();
+		List<UserDetailResource> brList=new ArrayList<>();
+		
+		for (UserDetail bank : collection) {
+			
+			UserDetailResource br =new UserDetailResource();
+			
+			BeanUtils.copyProperties(bank, br);
+			br.add(linkTo(BankAccountController.class).withRel("bankaccounts"));
+			br.add(linkTo(methodOn(BankController.class).getBanksForUser(br.getUserId())).withRel("banks"));
+			br.add(linkTo(methodOn(BankAccountController.class).getBankAccount(br.getUserId())).withSelfRel());
+
+			brList.add(br);
+		}
+		
+	    final Resources<UserDetailResource> resources = new Resources<>(brList);
+	    final String uriString = ServletUriComponentsBuilder.fromCurrentRequest().build().toUriString();
+	    resources.add(new Link(uriString, "self"));
+	    return ResponseEntity.ok(resources);
+	  
 	}
 }

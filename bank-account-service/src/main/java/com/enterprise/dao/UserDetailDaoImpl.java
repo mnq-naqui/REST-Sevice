@@ -71,9 +71,9 @@ public class UserDetailDaoImpl implements UserDetailDao {
 	 // Update
 	@Override
     public boolean update(final UserDetail userDetail) {
-       final String sql = "UPDATE user_detail SET user_name=?, email=?, mobile=?, current_address=?, permanent_address=?, city_ref=?, state_ref=?, pincode=? WHERE user_id=?";
+       final String sql = "UPDATE user_detail SET username=?, email=?, mobile=?, current_address=?, permanent_address=?, city_ref=?, state_ref=?, pincode=? WHERE user_detail_id=?";
        final Object[] params = new Object[]{userDetail.getUserName(), userDetail.getEmail(), userDetail.getMobile(),userDetail.getCurrentAddress(), userDetail.getPermanentAddress(), userDetail.getCityRef(), 
-    		   userDetail.getStateRef(), userDetail.getPincode(), userDetail.getBankRef(), userDetail.getBranchRef(), userDetail.getUserId()};
+    		   userDetail.getStateRef(), userDetail.getPincode(), userDetail.getUserId()};
         
 		return this.jdbcTemplate.update(sql, params) == 1;
 	}
@@ -81,7 +81,7 @@ public class UserDetailDaoImpl implements UserDetailDao {
     // Delete
 	@Override
     public boolean delete(Integer id) {
-        final String sql = "DELETE FROM customer WHERE customer_id = ?";
+        final String sql = "DELETE FROM user_detail WHERE user_detail_id = ?";
         final Object[] params = new Object[]{id};
         
 		return this.jdbcTemplate.update(sql, params) == 1;

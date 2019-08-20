@@ -29,8 +29,7 @@ public class BankAccountServiceImpl implements BankAccountService {
 	@Override
 	public UserDetail updateBankAccount(UserDetailResource customerDto) {
 		
-		//UserDetail customer = customerDao.findById(Integer.parseInt(customerDto.getCustomerId())).orElseThrow(CustomerNotFound :: new);
-		UserDetail customer = null;
+		UserDetail customer = customerDao.findById((customerDto.getUserId())).orElseThrow(CustomerNotFound :: new);
 		BeanUtils.copyProperties(customerDto, customer);
 		customerDao.update(customer) ;
 		
