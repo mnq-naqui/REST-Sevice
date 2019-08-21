@@ -67,8 +67,9 @@ public class BankAccountController {
     }
 	
 	@PutMapping(value = "/{customerId}")
-    public ResponseEntity<UserDetailResource> updateBankAccount(@PathVariable("customerId") long customerId,@RequestBody UserDetailResource customerDto) {
-	      
+    public ResponseEntity<UserDetailResource> updateBankAccount(@PathVariable("customerId") int customerId,@RequestBody UserDetailResource customerDto) {
+	    
+		customerDto.setUserId(customerId);
 		UserDetail updatedCustomer = accountService.updateBankAccount(customerDto);
 		UserDetailResource userDetailResource = new UserDetailResource();
 		BeanUtils.copyProperties(updatedCustomer, userDetailResource);
