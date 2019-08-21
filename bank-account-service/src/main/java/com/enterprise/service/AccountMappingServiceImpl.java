@@ -8,10 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.enterprise.dao.AccountMappingDao;
 import com.enterprise.dto.BankResource;
-import com.enterprise.dto.BranchResource;
 import com.enterprise.dto.UserDetailResource;
-import com.enterprise.entity.AccountMapping;
-import com.enterprise.entity.Branch;
 
 @Service
 public class AccountMappingServiceImpl implements AccountMappingService {
@@ -20,7 +17,7 @@ public class AccountMappingServiceImpl implements AccountMappingService {
 	AccountMappingDao maapingDao;
 
 	@Override
-	public void createBankAccount(UserDetailResource customerDto, String accountDetailId) {
+	public void createBankAccount(UserDetailResource customerDto, Integer accountDetailId) {
 		
 		List<BankResource> banks = customerDto.getBanks();
 		
@@ -32,5 +29,7 @@ public class AccountMappingServiceImpl implements AccountMappingService {
 		}
 		
 	}
+	
+	
 
 }

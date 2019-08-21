@@ -8,15 +8,15 @@ public class AccountDetail implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -1787496860788466127L;
-	private String accountDetailId;
+	private Integer accountDetailId;
 	private Double balance;
 	private String accountNumber;
 	private String accountType;
 	
-	public String getAccountDetailId() {
+	public Integer getAccountDetailId() {
 		return accountDetailId;
 	}
-	public void setAccountDetailId(String accountDetailId) {
+	public void setAccountDetailId(Integer accountDetailId) {
 		this.accountDetailId = accountDetailId;
 	}
 	public Double getBalance() {

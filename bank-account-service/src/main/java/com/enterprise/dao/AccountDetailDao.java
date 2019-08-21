@@ -6,4 +6,6 @@ public interface AccountDetailDao {
 	
 	public AccountDetail createAccountDetail(String accountNumber);
 
+	boolean delete(Integer id);
+
 }

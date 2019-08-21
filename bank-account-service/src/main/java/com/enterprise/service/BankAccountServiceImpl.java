@@ -1,13 +1,17 @@
 package com.enterprise.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.enterprise.dao.AccountDetailDao;
+import com.enterprise.dao.AccountMappingDao;
 import com.enterprise.dao.UserDetailDao;
 import com.enterprise.dto.UserDetailResource;
+import com.enterprise.entity.AccountMapping;
 import com.enterprise.entity.UserDetail;
 import com.enterprise.exception.UserNotFoundException;
 
@@ -16,6 +20,12 @@ public class BankAccountServiceImpl implements BankAccountService {
 	
 	@Autowired
 	UserDetailDao customerDao;
+	
+	@Autowired
+	AccountMappingDao accMappingDao;
+	
+	@Autowired
+	AccountDetailDao accDetailDao;
 	
 	@Override
 	public UserDetail createBankAccount(UserDetailResource customerDto) {
@@ -36,6 +46,11 @@ public class BankAccountServiceImpl implements BankAccountService {
 
 	@Override
 	public Boolean deleteBankAccount(int customerId) {
+		
+		accDetailDao.delete(
+				accMappingDao.getMappingByUserId(customerId)
+					.stream().findAny().get().getAccountDetailRef());
+		accMappingDao.delete(customerId);
 		
 		return customerDao.delete(customerId);
 	}
