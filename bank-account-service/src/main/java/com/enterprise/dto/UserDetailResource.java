@@ -89,5 +89,18 @@ public class UserDetailResource extends ResourceSupport implements Serializable{
 	public void setBanks(List<BankResource> banks) {
 		this.banks = banks;
 	}
+	public UserDetailResource(Integer userId, String userName, String email, String mobile, String currentAddress,
+			String permanentAddress, Integer cityRef, Integer stateRef, String pincode) {
+		super();
+		this.userId = userId;
+		this.userName = userName;
+		this.email = email;
+		this.mobile = mobile;
+		this.currentAddress = currentAddress;
+		this.permanentAddress = permanentAddress;
+		this.cityRef = cityRef;
+		this.stateRef = stateRef;
+		this.pincode = pincode;
+	}
 	
 }
