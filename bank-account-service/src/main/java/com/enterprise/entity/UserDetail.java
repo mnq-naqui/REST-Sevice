@@ -3,8 +3,8 @@ package com.enterprise.entity;
 import java.io.Serializable;
 import java.util.List;
 
-public class UserDetail implements Serializable{
-	
+public class UserDetail implements Serializable {
+
 	private static final long serialVersionUID = 5436367041276584029L;
 	private Integer userId;
 	private String userName;
@@ -18,9 +18,23 @@ public class UserDetail implements Serializable{
 	private Integer bankRef;
 	private Integer branchRef;
 	private List<Bank> banks;
-	
+
 	public UserDetail() {
-		
+
+	}
+
+	public UserDetail(Integer userId, String userName, String email, String mobile, String currentAddress,
+			String permanentAddress, Integer cityRef, Integer stateRef, String pincode) {
+		super();
+		this.userId = userId;
+		this.userName = userName;
+		this.email = email;
+		this.mobile = mobile;
+		this.currentAddress = currentAddress;
+		this.permanentAddress = permanentAddress;
+		this.cityRef = cityRef;
+		this.stateRef = stateRef;
+		this.pincode = pincode;
 	}
 
 	public Integer getUserId() {

@@ -16,6 +16,10 @@ public class AccountMapping implements Serializable {
 	private String branchRef;
 	
 	private Integer userRef;
+	
+	public AccountMapping() {
+		
+	}
 
 	public Integer getAccountDetailRef() {
 		return accountDetailRef;
@@ -46,6 +50,14 @@ public class AccountMapping implements Serializable {
 	}
 
 	public void setUserRef(Integer userRef) {
+		this.userRef = userRef;
+	}
+
+	public AccountMapping(Integer accountDetailRef, Integer bankRef, String branchRef, Integer userRef) {
+		super();
+		this.accountDetailRef = accountDetailRef;
+		this.bankRef = bankRef;
+		this.branchRef = branchRef;
 		this.userRef = userRef;
 	}
 	

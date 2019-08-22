@@ -21,6 +21,22 @@ public class Bank implements Serializable{
 	private String pincode;
 	private List<Branch> branches;
 	
+	public Bank() {
+		
+	}
+	
+	public Bank(Integer bankId, String bankName, String bankCode, String ifscCode, String address, Integer cityRef,
+			Integer stateRef, String pincode) {
+		super();
+		this.bankId = bankId;
+		this.bankName = bankName;
+		this.bankCode = bankCode;
+		this.ifscCode = ifscCode;
+		this.address = address;
+		this.cityRef = cityRef;
+		this.stateRef = stateRef;
+		this.pincode = pincode;
+	}
 	public Integer getBankId() {
 		return bankId;
 	}

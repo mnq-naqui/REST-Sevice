@@ -13,6 +13,10 @@ public class AccountDetail implements Serializable {
 	private String accountNumber;
 	private String accountType;
 	
+	public AccountDetail() {
+		
+	}
+	
 	public Integer getAccountDetailId() {
 		return accountDetailId;
 	}
@@ -35,6 +39,14 @@ public class AccountDetail implements Serializable {
 		return accountType;
 	}
 	public void setAccountType(String accountType) {
+		this.accountType = accountType;
+	}
+
+	public AccountDetail(Integer accountDetailId, Double balance, String accountNumber, String accountType) {
+		super();
+		this.accountDetailId = accountDetailId;
+		this.balance = balance;
+		this.accountNumber = accountNumber;
 		this.accountType = accountType;
 	}
 	
