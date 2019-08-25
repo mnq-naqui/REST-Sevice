@@ -48,7 +48,6 @@ public class UserDetailDaoTest extends BankAccountServiceApplicationTests {
 
 	}
 	
-	
 	@After
 	public void cleanUp() {
 		userDetailDao.delete(alice.getUserId());

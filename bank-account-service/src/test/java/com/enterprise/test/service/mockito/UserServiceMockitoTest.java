@@ -2,17 +2,16 @@ package com.enterprise.test.service.mockito;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.any;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.enterprise.dao.AccountDetailDaoImpl;
@@ -113,30 +112,37 @@ public class UserServiceMockitoTest {
 		assertThat(actualResult.getUserName()).isEqualTo(expectedResult.getUserName());
 	}
 	
-	/*@Test
+	@Test
 	public void whenCreateBankAccount_thenReturnUserDetail() {
-		// given
-		UserDetailResource resource=new UserDetailResource();
-		resource.setUserName("Naqui Qureshi");
-		resource.setPermanentAddress("Chhindwara");
-		resource.setEmail("naqui.qureshi@evry.com");
-		resource.setMobile("900842788");
-		resource.setCurrentAddress("HSR Bangalore");
-		resource.setCityRef(1);
-		resource.setStateRef(2);
-		resource.setPincode("560101");
-		
-		UserDetail toUpdate = new UserDetail(1, "Naqui Qureshi", "naqui.qureshi@evry.com", "900842788", "HSR Bangalore", "Chhindwara", 1, 2, "560101");
-		UserDetail expectedResult = new UserDetail(1, "Mohd Naqui Qureshi", "naqui.qureshi@evry.com", "900842788", "HSR Bangalore", "Chhindwara MP", 1, 2, "560101");
-		
-		doReturn(expectedResult).when(userDao).create(toUpdate);
+	    // given
+	    UserDetailResource resource = new UserDetailResource();
+	    resource.setUserName("Naqui Qureshi");
+	    resource.setPermanentAddress("Chhindwara");
+	    resource.setEmail("naqui.qureshi@evry.com");
+	    resource.setMobile("900842788");
+	    resource.setCurrentAddress("HSR Bangalore");
+	    resource.setCityRef(1);
+	    resource.setStateRef(2);
+	    resource.setPincode("560101");
 
-		// when
-		UserDetail actualResult = userService.createBankAccount(resource);
+	    UserDetail toUpdate =
+	            new UserDetail(1, "Naqui Qureshi", "naqui.qureshi@evry.com", "900842788", "HSR Bangalore", "Chhindwara",
+	                    1, 2, "560101");
+	    UserDetail expectedResult =
+	            new UserDetail(1, "Mohd Naqui Qureshi", "naqui.qureshi@evry.com", "900842788", "HSR Bangalore",
+	                    "Chhindwara MP", 1, 2, "560101");
 
-		// then
-		assertThat(actualResult.getPermanentAddress()).isEqualTo(expectedResult.getPermanentAddress());
-		assertThat(actualResult.getUserName()).isEqualTo(expectedResult.getUserName());
-	}*/
+	    doReturn(expectedResult).when(userDao).create(any(UserDetail.class));
+
+	    // when
+	    UserDetail actualResult = userService.createBankAccount(resource);
+
+	    // then
+	    assertThat(actualResult.getPermanentAddress()).isEqualTo(expectedResult.getPermanentAddress());
+	    assertThat(actualResult.getUserName()).isEqualTo(expectedResult.getUserName());
+	}
+
+	
+
 
 }

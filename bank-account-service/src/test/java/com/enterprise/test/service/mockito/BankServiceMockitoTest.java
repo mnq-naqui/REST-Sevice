@@ -1,6 +1,7 @@
 package com.enterprise.test.service.mockito;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 
 import java.util.ArrayList;
@@ -54,9 +55,9 @@ public class BankServiceMockitoTest {
 		exp2.add("1");
 		exp2.add("2");
 
-		doReturn(exp1).when(userDetailDao).findById(1);
-		doReturn(exp3).when(accountMappingDao).getMappingByUserId(1);
-		doReturn(expectedBanks).when(bankDao).findBankForUser(exp2);
+		doReturn(exp1).when(userDetailDao).findById(any(Integer.class));
+		doReturn(exp3).when(accountMappingDao).getMappingByUserId(any(Integer.class));
+		doReturn(expectedBanks).when(bankDao).findBankForUser(any(exp2.getClass()));
 
 		// when
 		List<Bank> actualResult = bankService.getBankForUser(1);
