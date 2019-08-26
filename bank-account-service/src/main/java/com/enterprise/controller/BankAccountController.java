@@ -88,7 +88,7 @@ public class BankAccountController {
 	}
 	
 	@GetMapping("/{customerId}")
-	public  ResponseEntity<UserDetailResource> getBankAccount(@PathVariable int customerId) {
+	public  ResponseEntity<UserDetailResource> getBankAccount(@PathVariable("customerId")int customerId) {
 		
 		UserDetail userDetail = accountService.getBankAccount(customerId);
 	

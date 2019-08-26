@@ -1,8 +1,10 @@
 package com.enterprise.test.service.mockito;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,6 +22,7 @@ import com.enterprise.dao.UserDetailDaoImpl;
 import com.enterprise.dto.UserDetailResource;
 import com.enterprise.entity.AccountMapping;
 import com.enterprise.entity.UserDetail;
+import com.enterprise.exception.UserNotFoundException;
 import com.enterprise.service.BankAccountServiceImpl;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -37,7 +40,6 @@ public class UserServiceMockitoTest {
 	@InjectMocks
 	private BankAccountServiceImpl userService;
 	
-
 	@Test
 	public void whenGetBankAccounts_thenReturnUserDetailList() {
 		// given
@@ -67,6 +69,20 @@ public class UserServiceMockitoTest {
 
 		// then
 		assertThat(actualUser).isEqualTo(expectedUser.get());
+	}
+	
+	@Test
+	public void whenBankAccount_thenThrowException() {
+	
+		// when
+		try {
+			when(userService.getBankAccount(any(Integer.class))).thenThrow(new UserNotFoundException(UserDetail.class, "id", Integer.toString(any(Integer.class))));
+			verify(userService.getBankAccount(any(Integer.class)));
+		} catch (UserNotFoundException e) {
+			//e.printStackTrace();
+			assertThat(e).isInstanceOf(UserNotFoundException.class);
+			assertThat(e.getMessage()).isEqualTo("UserDetail was not found for parameters {id=0}");
+		}
 	}
 	
 	@Test
@@ -125,9 +141,6 @@ public class UserServiceMockitoTest {
 	    resource.setStateRef(2);
 	    resource.setPincode("560101");
 
-	    UserDetail toUpdate =
-	            new UserDetail(1, "Naqui Qureshi", "naqui.qureshi@evry.com", "900842788", "HSR Bangalore", "Chhindwara",
-	                    1, 2, "560101");
 	    UserDetail expectedResult =
 	            new UserDetail(1, "Mohd Naqui Qureshi", "naqui.qureshi@evry.com", "900842788", "HSR Bangalore",
 	                    "Chhindwara MP", 1, 2, "560101");
